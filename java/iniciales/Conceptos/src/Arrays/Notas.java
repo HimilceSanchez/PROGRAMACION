@@ -10,7 +10,7 @@ public class Notas {
     static String[] modulos = { "BDatos", "Programación", "Redes", "Informáticos" };
     static int[][] notas = new int[ALUMNOS][MODULOS];
     static String persona;
-    String[] aprobados = quienAprueba(modulo);
+    
     
     public static void main(String[] args) {
         Notas.GenerarNotas();
@@ -18,17 +18,47 @@ public class Notas {
         Notas.OrdenarMenor();
         // Notas.quienAprueba();
 
-        System.out.println(getIndexModulo("Programación"));
-        System.out.println(quienAprueba("Redes"));
-        System.out.println("Alumnos que aprueban el módulo " + Arrays.toString(aprobados));
+        imprimirDatos(quienAprueba("Redes"));
+        imprimirDatos(ModulosAprueba("Jose"));
 
     }
+    public static String[] ModulosAprueba(String persona){
+        int Jper = getIndexPersona(persona);
+        String[] modulos = new String[MODULOS]; // respuesta
+        if (Jper != -1){ //si esta la persona
+            for (int i=0; i<MODULOS; i++){
+                if (Notas.notas[i][Jper]> 5){
+                    modulos[i] = Notas.modulos[i];
+                }
+            }
+        }
+        System.out.println(persona + " aprueba los modulos: ");
+        return modulos;
+    }
+    public static int getIndexPersona(String persona){
+        int index=-1;
+        for(int i=0; (i<ALUMNOS && index==-1); i++){
+            if (Notas.alumnos[i]==persona){
+                index=i;
+            }
+        }
+        System.out.println(persona + " es " + index);
+        return index;
+    }
 
-    public static int getIndexModulo(String modulo) {
-        int index = -1;
-        for (int i = 0; (i < MODULOS) && (index == -1); i++) {
-            index = i;
+    public static void imprimirDatos(String[] nombres){
+        for (int i=0; i<nombres.length; i++){
+            if (nombres[i] != null)
+                 System.out.print(nombres[i] + ", ");
+        }
+    }
 
+    public static int getIndexModulo(String modulo){
+        int index = -1; //sup que no se encuentra
+        for (int i=0; (i<MODULOS) && (index == -1); i++){
+            if (Notas.modulos[i] == modulo){
+                index=i;
+            }
         }
         return index;
     }
@@ -41,7 +71,7 @@ public class Notas {
                 System.out.print("   - " + modulos[j] + " : "); // 1
                 // System.out.println("Nota de "+ alumnos[i] + " - " + modulos[j] + " : "); //2
                 // lectura por teclado
-                Notas.notas[i][j] = Notas.sc.nextInt();
+                Notas.notas[i][j] = Notas.entrada.nextInt();
             }
         }
     }
@@ -91,49 +121,33 @@ public class Notas {
 
     public static void ImprimirNotasTabla() {
         System.out.println("------ LISTADO DE NOTAS --------------");
-        System.out.printf("%-20s", "");
+        System.out.printf("%20s", "");
         for (int i = 0; i < ALUMNOS; i++) {
-            System.out.printf("%-20s", alumnos[i] + "  ");
+            System.out.printf("%10s", alumnos[i] + "  ");
         }
         System.out.println();
         for (int i = 0; i < MODULOS; i++) {
-            System.out.printf("%-22s", modulos[i] + "   ");
+            System.out.printf("%20s", modulos[i] + "   ");
             for (int j = 0; j < ALUMNOS; j++) {
-                System.out.printf("%-20s", notas[j][i] + "        ");
+                System.out.printf("%10.2s", notas[j][i] + "        ");
             }
             System.out.println();
         }
     }
 
-    public static int getIndexPersona(String persona) {
-        int index = -1;
-
-        return index;
-    }
 
     public static String[] quienAprueba(String modulo) {
 
-        int umbralAprobado = 5;
-        int contadorAprobados = 0;
-        String[] personasAprovadas = new String[contadorAprobados];
-        int index = 0;
-        int indexModulo = getIndexModulo("Redes");
-        
-        
-        for (int i = 0; i < ALUMNOS; i++) {
-            if (notas[i][indexModulo] >= umbralAprobado) {
-                contadorAprobados++;
-            }
-        }
+        String[] personas = new String[ALUMNOS]; 
+        int Imod = getIndexModulo(modulo);
 
-        for (int i = 0; i < ALUMNOS; i++) {
-            if (notas[i][indexModulo] >= umbralAprobado) {
-                personasAprovadas[index++] = alumnos[i];
+        for (int i=0; i<ALUMNOS; i++){
+            if (Notas.notas[i][Imod] > 5){
+                personas[i] = alumnos[i];
             }
-        }
-        
-        
-
-        return personasAprovadas;
+        }   
+        System.out.println("Quien aprueba " + modulo + " : ");
+        return personas;
     }
+
 }
