@@ -1,4 +1,4 @@
-package poo;
+package poo.concesionario;
 public class Coche {
     public String marca;
     private String modelo;

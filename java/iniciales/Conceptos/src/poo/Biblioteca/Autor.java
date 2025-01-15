@@ -1,45 +1,90 @@
 package poo.Biblioteca;
+import poo.Biblioteca.Libro;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Autor {
-    private static int id=0;
-    private String nombre1;
-    private String apellido1;
-    private String apellido2;
-    public Autor(String nombre1, String apellido1, String apellido2){
-        this.setNombre(nombre1);
-        this.setApellido1(apellido1);
-        this.setApellido2(apellido2);
+    public  Scanner entrada = new Scanner(System.in); 
+    private int autorId;  
+    private String nombre;
+    private String apellidos;
+    private String email;
+    //almacenar los "hashCode de los libros de este autor"
+    //1 autor --> N libros
+    private ArrayList<Libro> libros = new ArrayList<>(); 
+    public String editorial; //Paraninfo, Anaya, McGrawHill
+    //Constructor
+    public Autor(int id){
+        this.setAutorId(id);
+        this.PedirDatos();
+    }
+    // public Autor(int id, String nombre, String apellidos, String email){
+    //     this.setAutorId(id);
+    //     this.setNombre(nombre);
+    //     this.setApellidos(apellidos);
+    //     this.setEmail(email);
+    // }
+
+    //La clase Autor pide los datos por teclado
+    public void PedirDatos(){
+        // System.out.print("Id: ");
+        // int id = this.entrada.nextInt();
+        // this.setAutorId(id);
+        System.out.println("Autor con Id: " + this.autorId);
+        System.out.println("-----------------------------");
+        System.out.print("Nombre: ");
+        String nombre = this.entrada.next();
+        this.setNombre(nombre);
+
+        System.out.print("Apellidos: ");
+        String apellidos = this.entrada.next();
+        this.setApellidos(apellidos);
+        
+        System.out.print("Correo: ");
+        String correo = this.entrada.next();
+        this.setEmail(correo);
+    }
+    public int getAutorId(){
+        return this.autorId;
+    }
+    public void setAutorId(int id){
+        this.autorId = id;
+    }
+    public void setNombre(String nombre){
+        this.nombre = nombre;
     }
     
-    public void setId(int id){
-        int digito1=(int)(Math.random()*1000);
-        id=digito1;
+    public void setApellidos(String apellidos){
+        this.apellidos = apellidos;
     }
-    public void setNombre(String nombre1){
-        this.nombre1 = nombre1.toUpperCase();
-    }
-    public void setApellido1(String apellido1){
-        this.apellido1 = apellido1.toUpperCase();
-    }
-    public void setApellido2(String apellido2){
-        this.apellido2 = apellido2.toUpperCase();
+    public void setEmail(String email){
+        this.email = email;
     }
 
     public String getNombre(){
-        return this.nombre1.toUpperCase();
+        return this.nombre.toUpperCase();
     }
-    public String getApellido1(){
-        return this.apellido2.toUpperCase();
-    }
-    public String getApellido2(){
-        return this.apellido2.toUpperCase();
-    }
-    public int getId(){
-        return this.id;
-    }
+    //resto de get 
 
-   
-        
-    
-        
-    
+    public String getNombreCompleto(){
+        return this.nombre.toUpperCase() + ", " + this.apellidos.toUpperCase();
+    }
+    public void info(){
+        System.out.println("Datos del Autor ( " + Integer.toHexString(System.identityHashCode(this)) +" ) "
+            + this.getNombreCompleto() + " : ");
+        System.out.print("Id: " + this.autorId);
+        System.out.print("Correo: " + this.email);
+        System.out.println("Libros : ");
+        for (Libro libro: this.libros){
+            libro.info();
+        }
+    }
+    // public String toStrng(){}
+
+    public void setLibros(Libro libro){
+        this.libros.add(libro);
+    }
+    public ArrayList<Libro> getLibros(){
+        return this.libros;
+    }
 }

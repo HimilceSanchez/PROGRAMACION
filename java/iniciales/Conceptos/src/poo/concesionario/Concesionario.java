@@ -1,4 +1,4 @@
-package poo;
+package poo.concesionario;
 import java.util.Scanner;
 
 import poo.concesionario.Vehiculo;

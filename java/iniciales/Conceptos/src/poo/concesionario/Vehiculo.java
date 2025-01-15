@@ -1,4 +1,4 @@
-package poo;
+package poo.concesionario;
 
 public class Vehiculo {
     public final int  DIAS = 7;

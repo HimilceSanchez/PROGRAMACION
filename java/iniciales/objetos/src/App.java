@@ -13,14 +13,14 @@ public class App
         //creacion de variables dentro de un metodo
         int valor=5 ;
         double comision = 15.5;
-        String nombre = "Himilce";
+        String apodo = "Himilce";
         String apellidos = "Sanchez Guevara "; //Clase String de java --> metodos
         String ciudad = "Almeria"; //tipo cadena de caracteres no es clase no tiene metodo
-        String nombreCompleto;
-        nombreCompleto = nombre + " " + apellidos ;
-        nombreCompleto.concat(nombre).concat(" ").concat(apellidos);
-        System.out.println("Nombre " + nombreCompleto.concat("Y eres de"));
-        System.out.println(nombreCompleto.length());
+        String apodoCompleto;
+        apodoCompleto = apodo + " " + apellidos ;
+        apodoCompleto.concat(apodo).concat(" ").concat(apellidos);
+        System.out.println("apodo " + apodoCompleto.concat("Y eres de"));
+        System.out.println(apodoCompleto.length());
         System.out.println(("Vives en ").concat(ciudad));
 
         //mensaje de bienvenida por pantalla
