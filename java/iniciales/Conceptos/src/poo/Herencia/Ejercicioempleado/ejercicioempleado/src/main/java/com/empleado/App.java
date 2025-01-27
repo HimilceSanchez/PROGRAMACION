@@ -1,11 +1,8 @@
 package com.empleado;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileReader;
+
 import javax.swing.text.AbstractDocument.LeafElement;
 public class App {
     public static ArrayList<Empleado> LEmpleados = new ArrayList<>();
@@ -18,7 +15,6 @@ public class App {
         LEmpleados.add(c1);
         LEmpleados.add(d1);
         // LEmpleados.add(new Director("003", "Maria", "maria@gamil.com", 5, 1));
-        App.guardarEmpleados();
         for (Empleado e: LEmpleados){
             e.setHorasExtra(10);
             System.out.println(e);
@@ -34,15 +30,5 @@ public class App {
         Director d1 = new Director("003", "Maria", "maria@gamil.com", 5, 1);
         System.out.println(d1);
         d1.analizar();
-    }
-    public static void guardarEmpleados(){
-        try (FileWriter writer = new FileWriter("empleados.json")){
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            //writer es un puntero a empleado.json
-            gson.toJson(LEmpleados, writer);
-        }
-        catch (IOException e){
-            System.out.println("No se ha podido escribir el archivo");
-        }
     }
 }

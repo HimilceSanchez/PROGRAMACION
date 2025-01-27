@@ -19,7 +19,10 @@ import okhttp3.Response;
 public class App 
 {
     public static ArrayList<Post> LPost = new ArrayList<>();
+
+    // preparar una instancia para realizar lecturas de consola
     public static  Scanner entrada = new Scanner(System.in); 
+    // prepara la conexion inicial http (a un servidor apache/nginx/toncat/iis/Express)
     public static OkHttpClient client = new OkHttpClient(); 
     public static String urlRoot = "https://jsonplaceholder.typicode.com/"; 
     public static void main( String[] args )
