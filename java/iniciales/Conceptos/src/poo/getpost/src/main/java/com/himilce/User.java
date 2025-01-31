@@ -1,11 +1,18 @@
 package com.himilce;
 
-public class Users {
+public class User {
    private int id;
    private String name;
    private String username;
    private String email;
-   Users(int id, String name, String username, String email){}
+   private String website;
+   User(int id, String name, String username, String email, String website){
+       this.setId(id);
+       this.setName(name);
+       this.setUsername(username);
+       this.setEmail(email);
+       this.setWebsite(website);
+   }
    public int getId(){
        return id;
    }
@@ -30,12 +37,10 @@ public class Users {
    public void setEmail(String email){
        this.email=email;
    }
-  public String toString(){
-       return "User{" +
-               "id=" + id +
-               ", name='" + name + '\'' +
-               ", username='" + username + '\'' +
-               ", email='" + email + '\'' +
-               '}';
+   public String getWebsite(){
+       return website;
    }
+   public void setWebsite(String website){
+       this.website=website;
+   }    
 }
