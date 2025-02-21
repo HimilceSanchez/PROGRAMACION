@@ -1,0 +1,20 @@
+<!-- layout:decorate se pone en la plantilla hija que hereda de base-->
+<html xmlns="http://www.thymeleaf.org" 
+layout:decorate="www/layout/base"
+lang="es-ES">
+
+
+<section layout:fragment="MainBase">
+
+mmmmmm
+<!-- Inicialización del menú lateral en móvil -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        M.Sidenav.init(document.querySelectorAll('.sidenav'));
+    });
+</script>
+
+</section>
+
+<div layout:fragment="FooterBase">
+</div>

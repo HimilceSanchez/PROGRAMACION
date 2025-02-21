@@ -1,0 +1,11 @@
+.brand-logo {
+    font-size: 2em;
+}
+.sidenav-trigger{
+    display: flex;
+}
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: -10px;
+}

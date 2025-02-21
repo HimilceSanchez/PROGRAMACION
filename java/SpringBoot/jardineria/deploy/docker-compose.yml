@@ -1,0 +1,14 @@
+version: '3'
+services:
+  db:
+    container_name: dbjardineriap
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: jardineriap
+      MARIADB_USER: root
+      MARIADB_PASSWORD: root
+    volumes:
+      - ./data:/var/lib/mysql
+    ports:
+      - "3308:3306"

@@ -1,4 +1,5 @@
 package com.himilce;
+import com.himilce.Post;
 
 import java.io.FileWriter;
 //java
@@ -18,12 +19,16 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
+
 public class App 
 {
     public static ArrayList<Post> LPost = new ArrayList<>();
-    public static Type postListType = new TypeToken<List<Post>>() {}.getType();
     public static ArrayList<User> LUser = new ArrayList<>();
+
+    public static Type postListType = new TypeToken<List<Post>>() {}.getType();
     public static Type userListType = new TypeToken<List<User>>() {}.getType();
+    
 
     //prepara una instancia para realizar lecturas de consola
     public static  Scanner entrada = new Scanner(System.in); 
@@ -32,13 +37,37 @@ public class App
     //url base de la API
     public static String urlRoot = "https://jsonplaceholder.typicode.com/"; 
     //ruta del fichero pòst.json
-    public static String ruta = "C:/Modulo/PRogramacion/Java/iniciales/Conceptos/src/poo/gestpost/public";
+    public static String ruta = "C:/Modulo/PROGRAMACION/java/iniciales/Conceptos/src/poo/getpost/public";
+
 
     public static void main( String[] args )
     {
         App.Menu();
     }
 
+    public static void CargarUser(){
+        //Crea la REQUEST Http de tipo Get para listar todos los Posts
+        Request request = new Request.Builder()
+                                .url(App.urlRoot + "users")
+                                .build();
+        System.out.println("Enviando ..."+ App.urlRoot + "users");
+        try (Response response = client.newCall(request).execute() ) {
+            if (!response.isSuccessful()){
+                System.out.println("Response Users Fallido");
+                throw new IOException("Unexpected code "+ response);
+            }
+            System.out.println("Conexión Establedida y Response ok");
+            String responseBody = response.body().string();
+            Gson gson = new Gson();
+            App.userListType = new TypeToken<List<User>>() {}.getType();
+            App.LUser = gson.fromJson(responseBody, userListType);
+            // for (User user : App.LUser) {
+            //     System.out.println(user.getName());
+            // }  
+        }catch (IOException e){ //IOException captura errores HTTP
+            e.printStackTrace(); //mensaje generico tipo "Ayuda SysAdmin"
+        }
+    }
     public static void CargarPost(){
         //Crea la REQUEST Http de tipo Get para listar todos los Posts
         Request request = new Request.Builder()
@@ -52,7 +81,7 @@ public class App
         //me 
         try (Response response = client.newCall(request).execute() ) {
             if (!response.isSuccessful()){
-                System.out.println("Response Fallido");
+                System.out.println("Response Posts Fallido");
                 throw new IOException("Unexpected code "+ response);
             }
             System.out.println("Conexión Establedida y Response ok");
@@ -63,44 +92,14 @@ public class App
             //fromJson: transforma la respesta en formato json con su tipo (estructura)
             //y genera un arraylist de java (lista de obejtos)
             App.LPost = gson.fromJson(responseBody, postListType);
-            for (Post post : LPost) {
-                System.out.println(post.getTitle());
-            }  
+            // for (Post post : LPost) {
+            //     System.out.println(post.getTitle());
+            // }  
         }catch (IOException e){ //IOException captura errores HTTP
             e.printStackTrace(); //mensaje generico tipo "Ayuda SysAdmin"
         }
     }
-    public static void CargarUsers(){
-        //Crea la REQUEST Http de tipo Get para listar todos los Posts
-        Request request = new Request.Builder()
-                                .url(App.urlRoot + "users")
-                                .build();
-        //Ejecutar la solicitud --> send
-        System.out.println("Enviando ..."+ App.urlRoot + "users");
-        //client.newCall(request).execute(): Lanza la peticion (request) hacia la api
-        //Api  :  (servidor web + sgbd) --> servidor fisico con su ip (dns)
-        //La Api recibe una REQUEST (petición) y devuelve una RESPONSE (respuesta JSON)
-        //me 
-        try (Response response = client.newCall(request).execute() ) {
-            if (!response.isSuccessful()){
-                System.out.println("Response Fallido");
-                throw new IOException("Unexpected code "+ response);
-            }
-            System.out.println("Conexión Establedida y Response ok");
-            String responseBody = response.body().string();
-            Gson gson = new Gson();
-            //genera la estructura del Post.json en base a la estructura de la clase Post
-            App.userListType = new TypeToken<List<User>>() {}.getType();
-            //fromJson: transforma la respesta en formato json con su tipo (estructura)
-            //y genera un arraylist de java (lista de obejtos)
-            App.LUser = gson.fromJson(responseBody, userListType);
-            for (User user : LUser) {
-                System.out.println(user.getUsername());
-            }  
-        }catch (IOException e){ //IOException captura errores HTTP
-            e.printStackTrace(); //mensaje generico tipo "Ayuda SysAdmin"
-        }
-    }
+    
     public static void guardarPost(){
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -121,15 +120,67 @@ public class App
             e.printStackTrace(); //mensaje generico tipo "Ayuda SysAdmin"
         }
     }
+
+    public static ArrayList<Post> getPostUser(int id_user){
+        //devolver el array de Post del usuario con id_user
+        ArrayList<Post> lista = new ArrayList<>();
+        User uactual = App.getUser(id_user);
+        for (Post post: App.LPost ){
+            //where user.id == Post.userid
+            if ((post.getUserId()==id_user)){ 
+                lista.add(post);
+                post.setUser(uactual);
+            }
+        }
+        return lista;
+    }
+
+    public static User getUser(String nombre){
+
+        /* select * Sistemas RELACIONALES (registro)
+           from User as u --> alias
+           where u.username == nombre
+        */
+        for (User u: App.LUser){
+            if (u.getUsername().equals(nombre)){
+                return u;
+            }
+        }
+        return null;
+    }
+    public static User getUser(int id){
+        for (User u: App.LUser){
+            if (u.getId()==id){
+                return u;
+            }
+        }
+        return null;
+    }
+
+    public static void MostrarPostUser(String uname){
+        //muestre el nombre del usuario y el titulo de sus posts
+        User u = App.getUser(uname);
+        System.out.println("Usuario "+ u.getId() + " : "+ u.getUsername() );
+        for (Post post: u.posts){
+            System.out.println(" - "+ "( "+ post.getUserId()+ " )"+  post.getTitle());
+        }
+
+    }
+    public static void Asignar(){
+        //Asignar los post a cada usuario
+        for (User user: App.LUser){
+            user.posts = App.getPostUser(user.getId());
+        }
+    }
+
     public static void Menu(){
         int opcion = -1;
 
         while (opcion != 0) {
             System.out.println("\n--- Menú de Empleados ---");
             System.out.println("1. Cargar Datos");
+            System.out.println("2. Posts del usuario: ");
             System.out.println("6. Guardar Datos");
-    
-
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = App.entrada.nextInt();
@@ -138,8 +189,14 @@ public class App
             switch (opcion) {
                 case 1:
                     App.CargarPost();
-                    App.CargarUsers();
+                    App.CargarUser();
+                    App.Asignar();
                     System.out.println("termino");
+                    break;
+                case 2: 
+                    System.out.print("Nombre del Usuario para ver sus posts: ");
+                    String name = App.entrada.nextLine();
+                    App.MostrarPostUser(name);
                     break;
                 case 6:
                     App.guardarPost();

@@ -1,0 +1,202 @@
+/*
+Examen-Recuperación-Youssefmf
+Youssef Miftah El Baze
+Marzo 2024
+*/
+* {
+    box-sizing: border-box;
+    margin: auto;
+}
+.imagen {
+    width: 477650px;
+    height: 456440px;
+    float: right;
+}
+/*Fondo de la página y tamaño del texto*/
+body {
+    background-image: linear-gradient(to left, rgb(251, 255, 0), rgb(252, 174, 5));
+    font-family: "Fuente";
+    font-size: 1.1em;
+    width: 100%;
+    margin: auto;
+}
+@media (min-width:400px){
+    .Menu a {
+        font-size: 1em;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        padding: 20px;
+        float: left;
+        width: 20%;
+        transition: all 2s ease;
+    }
+}
+@media (min-width:1200px) {
+        .Menu a{
+            font-size: 1em;
+            background-color: aqua;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 20px;
+            float: left;
+            width: 20%;
+            transition: all 2s ease;
+        } 
+}
+.Menu > a:hover {
+    background-color: rgba(63, 63, 62, 0.644);
+    color: black;
+    transform: scale(1) translate(0px, 10px);
+}
+.Menu{
+    border: 2px solid rgb(112, 112, 112);
+    overflow: hidden;
+    border-radius: 5%;
+}
+/*Decoración del título y el pie de página*/
+header, footer {
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+    text-shadow: 2px 2px 2px white ;
+    padding: 15px;
+}
+header h1 {
+    padding: 20px;
+    transition: all 1s ease;
+}
+/*Efecto al poner el puntero por encima del header*/
+header > h1:hover {
+    background-color: rgba(0, 255, 255, 0.644);
+    transform: scale(1);
+    border: 6px double black;
+}
+/*Pie de página*/
+footer {
+    position: fixed;
+    bottom: 0px;
+    background-color: rgb(7, 235, 252);
+    width: 100%;
+    border: 1px solid black;
+}
+/*Decoración para que la primera letra de un parrafo sea distinta al resto*/
+p::first-letter  {
+    font-size: 30px;
+    color: red;
+}
+/*Texto dividido en columnas*/
+#columnas {
+    float: left;
+    width: 40%;
+    text-align: justify;
+    column-count: 3;
+    column-gap: 5em;
+    padding: 20px;
+    column-rule: 3px solid red;
+}
+h3 {
+    text-align: center;
+}
+h3, h5 {
+    margin: auto;
+    width: 50%;
+}
+main {
+    padding: 30px;
+}
+/*Botones*/
+/*Decoración de los botones que muestran los elementos*/
+#mostrar button {
+    text-decoration: none;
+    text-align: center;
+    width: 60%;
+    padding: 16px;
+    background: none;
+    border-style: none;
+    transition: all 2s ease;
+    display: block;
+}
+/*Efecto al pasar por encima de los botones*/
+#mostrar > button:hover {
+    background-color: rgba(0, 255, 255, 0.644);
+    transform: scale(1);
+    border: 1px solid black;
+    transform: rotate(-5deg);
+}
+/*Posición de los botones para mostrar elementos*/
+#mostrar {
+    float: left;
+    width: 20%;
+}
+/*Decoración de los botones que ocultan los elementos*/
+#ocultar button {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    width: 60%;
+    background: none;
+    border-style: none;
+    padding: 16px;
+    transition: all 2s ease;
+}
+/*Efecto al pasar por encima de los botones*/
+#ocultar > button:hover {
+    background-color: rgba(0, 255, 255, 0.644);
+    transform: scale(1);
+    border: 1px solid black;
+    transform: rotate(-5deg);
+}
+/*Posición de los botones para ocultar elementos*/
+#ocultar {
+    float: right;
+    width: 20%;
+}
+/*Display grid de videos*/
+#display {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+    width: 90%;
+    margin: auto;
+    padding: 60px;
+    justify-content: center;
+    align-items: center;
+}
+/*Bordes de los videos*/
+iframe {
+    border-radius: 10%;
+}
+/*Decoración de4 la tabla*/
+#tab {
+    width: 90%;
+    margin: auto;
+    padding: 40px;
+}
+table {
+    text-align: center;
+    box-shadow: 8px 8px 5px grey;
+    width: 50%;
+    margin: auto;
+    background-image: linear-gradient(to left, rgb(251, 255, 0), rgb(252, 174, 5));
+}
+tr th{
+    border: 1px solid black;
+    background-color: ghostwhite;
+}
+.imagen {
+    width: 50px;
+    height: 40px;
+    float: right;
+}
+/*Lista con fondo*/
+#listas{
+    background-image: url("./Imagenes_y_videos/imagen.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    align-content: center;
+    width: 30%;
+}

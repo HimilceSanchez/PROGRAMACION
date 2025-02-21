@@ -1,18 +1,19 @@
 package com.himilce;
-
 public class Post {
     private int id;
     private int userId;
     private String title;
     private String body;
+    private User user; //foreing key
 
-
+    
     Post(int id, int userid, String title, String body){
         this.setId(id);
         this.setUserId(userid);
         this.setBody(body);
         this.setTitle(title);
     }
+
 
     public int getId(){
         return this.id;
@@ -41,5 +42,14 @@ public class Post {
     public void setTitle(String title){
         this.title = title.toUpperCase();
     }
+
+    public void setUser(User u){
+        this.user = u;
+    }
+
+    public User getUser(){
+        return this.user;
+    }
+
     
 }

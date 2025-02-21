@@ -1,0 +1,117 @@
+/*
+Proyecto Web-Estilo general para los html
+Youssef Miftah El Baze
+Diciembre 2024
+*/
+* {
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+body {
+    background-image: url("/static/images/Fondo1.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: "Fuente";
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.fixed-button {
+    text-decoration: none;
+    position: fixed;
+    top: 120px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: #008cba;
+    color: white;
+    border-radius: 5%;
+    font-size: 16px;
+    transition: all 2s ease;
+
+}
+
+.fixed-button:hover {
+    background-color: #3dffff;
+    color: black;
+    transform: scale(1.06) translate(0px, 0px);
+}
+
+main {
+    color: white;
+    padding: 30px;
+}
+
+header,
+footer {
+    background-color:   #0090ff;
+    text-align: center;
+    border: 1px solid #008cba;
+    padding: 5px;
+    border-radius: 20px;
+    margin: 1vh;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: -10px;
+}
+
+h1,
+h2,
+footer {
+    text-shadow: 3px 3px grey;
+    text-align: center;
+}
+
+@font-face {
+    font-family: "Fuente";
+    src: url(/Fuentes/GoodOldDOSSmooth.ttf);
+}
+
+.Menu a{
+    font-size: 1em;
+    background-color: #00c9ff;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 20px;
+    float: left;
+    width: 20%;
+    transition: all 2s ease;
+
+} 
+
+
+
+@media (max-width:600px) {
+       
+        .Menu a {
+            font-size: 0.6em;
+            background-color: #3dffff;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 20px;
+            float: left;
+            width: 20%;
+            transition: all 2s ease;
+        }
+}
+
+.Menu>a:hover {
+    background-color: #3dffff;
+    color: black;
+    transform: scale(1.01) translate(0px, 0px);
+}
+
+.Menu {
+    border: 2px solid rgb(112, 112, 112);
+    overflow: hidden;
+    border-radius: 5%;
+}

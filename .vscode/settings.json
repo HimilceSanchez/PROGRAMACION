@@ -1,0 +1,6 @@
+{
+    "java.project.sourcePaths": [
+        "java/iniciales/Conceptos/src",
+        "java/SpringBoot/pizzeria/src/main/java/com/himilce/pizzeria"
+    ]
+}
